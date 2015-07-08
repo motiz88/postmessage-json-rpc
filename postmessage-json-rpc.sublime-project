@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": ["dist", "node_modules", "submodules"],
+			"file_exclude_patterns": ["*.sublime*", "*.bak"]
+		}
+	]
+}
