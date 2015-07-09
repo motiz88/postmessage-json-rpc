@@ -1,7 +1,7 @@
 ---
   parser: babel-eslint
   rules:
-    quotes: 0
+    quotes: [1, single]
     comma-dangle: 0
     curly: 0
     no-underscore-dangle: 0

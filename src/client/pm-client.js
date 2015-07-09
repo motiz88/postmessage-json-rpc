@@ -1,7 +1,10 @@
-/* eslint-env browser */
-
 import uniqueid from 'uniqueid';
 import shortid from 'shortid';
+
+function isWindow(maybeWindow) {
+
+    return maybeWindow && maybeWindow.window === maybeWindow;
+}
 
 export
 default class PostMessageRpcClient {
@@ -13,10 +16,8 @@ default class PostMessageRpcClient {
     _dispatches = new Map();
 
     handleMessage = (e) => {
-        if (!e.data || typeof e.data.id === 'undefined') {
-            // ignore obviously invalid messages: they're not for us
+        if (!e.data || typeof e.data.id === 'undefined' || !e.data.jsonrpc || 'method' in e.data)
             return;
-        }
         const dispatch = this._dispatches.get(e.data.id);
         this._dispatches.delete(e.data.id);
         if (dispatch && dispatch.resolve && dispatch.reject) {
@@ -37,10 +38,11 @@ default class PostMessageRpcClient {
 
     _dispatch(method, id, ...params) {
         let target = this.targetWindow;
-        if (params.length && params[0] instanceof Window)
+        if (params.length && isWindow(params[0]))
             target = params.shift();
-        if (!(target instanceof Window))
+        if (!isWindow(target)) {
             throw new Error('Target window not set');
+        }
         return new Promise((resolve, reject) => {
             if (typeof id !== 'undefined')
                 this._dispatches.set(id, {
@@ -53,7 +55,12 @@ default class PostMessageRpcClient {
                     method,
                     params
                 };
-                target.postMessage(message, target.location.origin || '*');
+                let origin = target.location.origin;
+                if (origin === 'null' || origin === 'about://' /* holy crap, IE! */)
+                    origin = null;
+                target.postMessage(message, origin || '*');
+                if (typeof id === 'undefined')
+                    resolve();
             } catch (e) {
                 this._dispatches.delete(id);
                 reject(e);

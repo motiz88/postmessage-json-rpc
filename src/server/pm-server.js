@@ -1,6 +1,6 @@
 /* eslint-env browser */
 
-import PostMessageRespondingRouter from './pm-router.js';
+import PostMessageRespondingRouter from './pm-responding-router.js';
 
 export default class PostMessageRpcServer extends PostMessageRespondingRouter {
     constructor(...args) {

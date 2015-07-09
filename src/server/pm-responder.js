@@ -1,14 +1,4 @@
-function toResponse(promise, id) {
-    return promise.then(result => ({
-        jsonrpc: '2.0',
-        result,
-        id,
-    }), error => ({
-        jsonrpc: '2.0',
-        error: Object.assign({}, error),
-        id,
-    }));
-}
+import util from 'util';
 
 export default class PostMessageResponder {
     constructor(router) {
@@ -16,12 +6,23 @@ export default class PostMessageResponder {
     }
 
     handleMessage = (e) => {
-        const result = this.router.handleMessage(e);
-        if (!result)
+        const resultPromise = this.router.handleMessage(e);
+        if (!resultPromise)
             return;
-        toResponse(result, e.data.id)
-            .then(response => {
-                e.source.postMessage(response, e.origin);
-            });
+
+        resultPromise
+            .then(result => ({result}),
+                error => ({
+                    error: {
+                        code: -32000,
+                        // message: error.message || error.code || error.name,
+                        // data: util.inspect(error)
+                    }
+                }))
+            .then(response => Object.assign({
+                jsonrpc: '2.0',
+                id: e.data.id
+            }, response))
+            .then(response => e.source.postMessage(response, '*'));
     }
 }

@@ -6,16 +6,6 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        mochaTest: {
-            default: {
-                options: {
-                    reporter: 'spec',
-                    quiet: false, // Optionally suppress output to standard out (defaults to false)
-                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
-                },
-                src: ['test/**/*.js']
-            }
-        },
         eslint: {
             default: {
                 files: {
@@ -23,10 +13,16 @@ module.exports = function(grunt) {
                 },
             },
         },
+        karma: {
+            once: {
+                configFile: 'karma.conf.js',
+                singleRun: true,
+            }
+        },
         watch: {
             default: {
-                files: ['.eslintrc', 'Gruntfile.js', '<%= eslint.default.files.src %>'],
-                tasks: ['force:eslint', 'mochaTest', 'babel']
+                files: ['**/.eslintrc', 'Gruntfile.js', '<%= eslint.default.files.src %>'],
+                tasks: ['eslint', 'karma:once', 'babel']
             },
         },
         babel: {
@@ -46,7 +42,7 @@ module.exports = function(grunt) {
         },
     });
 
-    grunt.registerTask('test', ['eslint', 'mochaTest']);
+    grunt.registerTask('test', ['eslint', 'karma:once']);
     grunt.registerTask('build', ['clean', 'eslint', 'babel']);
 
     grunt.registerTask('default', 'build');
