@@ -17,6 +17,9 @@ module.exports = function(grunt) {
             once: {
                 configFile: 'karma.conf.js',
                 singleRun: true,
+            },
+            ci: {
+                configFile: 'karma.ci.conf.js',
             }
         },
         watch: {
@@ -37,12 +40,12 @@ module.exports = function(grunt) {
             },
         },
         clean: {
-            'default': ["dist"],
-            'bak': ["dist/*.bak"]
+            'default': ["dist"]
         },
     });
 
     grunt.registerTask('test', ['eslint', 'karma:once']);
+    grunt.registerTask('test:ci', ['eslint', 'karma:ci']);
     grunt.registerTask('build', ['clean', 'eslint', 'babel']);
 
     grunt.registerTask('default', 'build');
