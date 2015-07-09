@@ -2,3 +2,5 @@ node_modules
 *.bak
 *.sublime-workspace
 coverage
+sauce_connect.log
+npm-debug.log
