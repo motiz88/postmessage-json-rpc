@@ -1,5 +1,3 @@
-/* eslint-env browser */
-
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -24,6 +22,11 @@ var _shortid = require('shortid');
 
 var _shortid2 = _interopRequireDefault(_shortid);
 
+function isWindow(maybeWindow) {
+
+    return maybeWindow && maybeWindow.window === maybeWindow;
+}
+
 var PostMessageRpcClient = (function () {
     function PostMessageRpcClient(targetWindow) {
         var _this = this;
@@ -34,10 +37,7 @@ var PostMessageRpcClient = (function () {
         this._dispatches = new _Map();
 
         this.handleMessage = function (e) {
-            if (!e.data || typeof e.data.id === 'undefined') {
-                // ignore obviously invalid messages: they're not for us
-                return;
-            }
+            if (!e.data || typeof e.data.id === 'undefined' || !e.data.jsonrpc || 'method' in e.data) return;
             var dispatch = _this._dispatches.get(e.data.id);
             _this._dispatches['delete'](e.data.id);
             if (dispatch && dispatch.resolve && dispatch.reject) {
@@ -68,8 +68,10 @@ var PostMessageRpcClient = (function () {
             var _this2 = this;
 
             var target = this.targetWindow;
-            if (params.length && params[0] instanceof Window) target = params.shift();
-            if (!(target instanceof Window)) throw new Error('Target window not set');
+            if (params.length && isWindow(params[0])) target = params.shift();
+            if (!isWindow(target)) {
+                throw new Error('Target window not set');
+            }
             return new _Promise(function (resolve, reject) {
                 if (typeof id !== 'undefined') _this2._dispatches.set(id, {
                     resolve: resolve, reject: reject
@@ -81,7 +83,10 @@ var PostMessageRpcClient = (function () {
                         method: method,
                         params: params
                     };
-                    target.postMessage(message, target.location.origin || '*');
+                    var origin = target.location.origin;
+                    if (origin === 'null' || origin === 'about://' /* holy crap, IE! */) origin = null;
+                    target.postMessage(message, origin || '*');
+                    if (typeof id === 'undefined') resolve();
                 } catch (e) {
                     _this2._dispatches['delete'](id);
                     reject(e);

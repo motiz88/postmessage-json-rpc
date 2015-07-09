@@ -16,9 +16,9 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _pmRouterJs = require('./pm-router.js');
+var _pmRespondingRouterJs = require('./pm-responding-router.js');
 
-var _pmRouterJs2 = _interopRequireDefault(_pmRouterJs);
+var _pmRespondingRouterJs2 = _interopRequireDefault(_pmRespondingRouterJs);
 
 var PostMessageRpcServer = (function (_PostMessageRespondingRouter) {
     function PostMessageRpcServer() {
@@ -46,7 +46,7 @@ var PostMessageRpcServer = (function (_PostMessageRespondingRouter) {
     }]);
 
     return PostMessageRpcServer;
-})(_pmRouterJs2['default']);
+})(_pmRespondingRouterJs2['default']);
 
 exports['default'] = PostMessageRpcServer;
 module.exports = exports['default'];

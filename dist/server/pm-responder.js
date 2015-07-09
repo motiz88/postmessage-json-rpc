@@ -4,24 +4,15 @@ var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default
 
 var _Object$assign = require('babel-runtime/core-js/object/assign')['default'];
 
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
-function toResponse(promise, id) {
-    return promise.then(function (result) {
-        return {
-            jsonrpc: '2.0',
-            result: result,
-            id: id
-        };
-    }, function (error) {
-        return {
-            jsonrpc: '2.0',
-            error: _Object$assign({}, error),
-            id: id
-        };
-    });
-}
+
+var _util = require('util');
+
+var _util2 = _interopRequireDefault(_util);
 
 var PostMessageResponder = function PostMessageResponder(router) {
     var _this = this;
@@ -29,10 +20,24 @@ var PostMessageResponder = function PostMessageResponder(router) {
     _classCallCheck(this, PostMessageResponder);
 
     this.handleMessage = function (e) {
-        var result = _this.router.handleMessage(e);
-        if (!result) return;
-        toResponse(result, e.data.id).then(function (response) {
-            e.source.postMessage(response, e.origin);
+        var resultPromise = _this.router.handleMessage(e);
+        if (!resultPromise) return;
+
+        resultPromise.then(function (result) {
+            return { result: result };
+        }, function (error) {
+            return {
+                error: {
+                    code: -32000
+                }
+            };
+        }).then(function (response) {
+            return _Object$assign({
+                jsonrpc: '2.0',
+                id: e.data.id
+            }, response);
+        }).then(function (response) {
+            return e.source.postMessage(response, '*');
         });
     };
 
@@ -41,3 +46,5 @@ var PostMessageResponder = function PostMessageResponder(router) {
 
 exports['default'] = PostMessageResponder;
 module.exports = exports['default'];
+// message: error.message || error.code || error.name,
+// data: util.inspect(error)
