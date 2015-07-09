@@ -47,7 +47,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "grunt test:ci"
+    "test": "node_modules/.bin/grunt test:ci"
   },
   "repository": {
     "type": "git",
