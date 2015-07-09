@@ -1,4 +1,4 @@
-## postmessage-json-rpc [![Build Status](https://travis-ci.org/motiz88/postmessage-json-rpc.svg?branch=master)](https://travis-ci.org/motiz88/postmessage-json-rpc)
+## postmessage-json-rpc [![Build Status](https://travis-ci.org/motiz88/postmessage-json-rpc.svg?branch=master)](https://travis-ci.org/motiz88/postmessage-json-rpc) [![Coverage Status](https://coveralls.io/repos/motiz88/postmessage-json-rpc/badge.svg?branch=master&service=github)](https://coveralls.io/github/motiz88/postmessage-json-rpc?branch=master)
 
 JSON-RPC over `window.postMessage`, with a Promise-based API.
 
