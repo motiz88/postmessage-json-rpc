@@ -28,7 +28,9 @@ var PostMessageResponder = function PostMessageResponder(router) {
         }, function (error) {
             return {
                 error: {
-                    code: -32000
+                    code: -32000,
+                    message: error.message || error.code || error.name,
+                    data: _util2['default'].inspect(error)
                 }
             };
         }).then(function (response) {
@@ -46,5 +48,3 @@ var PostMessageResponder = function PostMessageResponder(router) {
 
 exports['default'] = PostMessageResponder;
 module.exports = exports['default'];
-// message: error.message || error.code || error.name,
-// data: util.inspect(error)

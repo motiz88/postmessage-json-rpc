@@ -15,8 +15,8 @@ export default class PostMessageResponder {
                 error => ({
                     error: {
                         code: -32000,
-                        // message: error.message || error.code || error.name,
-                        // data: util.inspect(error)
+                        message: error.message || error.code || error.name,
+                        data: util.inspect(error)
                     }
                 }))
             .then(response => Object.assign({
