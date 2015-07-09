@@ -41,5 +41,30 @@
     "babel-runtime": "^5.6.15",
     "shortid": "^2.2.2",
     "uniqueid": "^0.1.0"
-  }
+  },
+  "description": "JSON-RPC over `window.postMessage`, with a Promise-based API.",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/motiz88/postmessage-json-rpc.git"
+  },
+  "keywords": [
+    "postMessage",
+    "JSON-RPC",
+    "window",
+    "onmessage",
+    "iframe",
+    "RPC"
+  ],
+  "author": "Moti Zilberman <motiz88@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/motiz88/postmessage-json-rpc/issues"
+  },
+  "homepage": "https://github.com/motiz88/postmessage-json-rpc"
 }
