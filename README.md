@@ -55,10 +55,8 @@ There were already some libraries that did something like this, but I really wan
 
 ## Installation
 
-The package will be published on `npm` soonish - In the mean time you can install it directly from GitHub:
-
 ```sh
-npm install --save motiz88/postmessage-json-rpc
+npm install --save postmessage-json-rpc
 ```
 
 Use Browserify / Webpack to include this module in your front-end code.
