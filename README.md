@@ -5,6 +5,7 @@ JSON-RPC over `window.postMessage`, with a Promise-based API.
 This package provides a server and client written in JavaScript that can communicate with each other across browser windows or `iframe`s.
 
 ## Code Example
+
 ### ES2015
 ```javascript
 import {Client, Server} from 'postmessage-json-rpc';
