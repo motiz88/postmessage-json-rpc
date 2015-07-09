@@ -8,7 +8,7 @@ module.exports = function(config) {
         coverageReporter: {
             type: 'lcov',
             dir: 'coverage/'
-        }
+        },
         captureTimeout: 300000,
         browsers: ['PhantomJS', 'Firefox'],
         singleRun: true
