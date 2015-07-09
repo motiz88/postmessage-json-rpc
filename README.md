@@ -1,8 +1,9 @@
-## postmessage-json-rpc
+## postmessage-json-rpc [![Build Status](https://travis-ci.org/motiz88/postmessage-json-rpc.svg?branch=master)](https://travis-ci.org/motiz88/postmessage-json-rpc)
 
 JSON-RPC over `window.postMessage`, with a Promise-based API.
 
 This package provides a server and client written in JavaScript that can communicate with each other across browser windows or `iframe`s.
+
 
 ## Code Example
 
