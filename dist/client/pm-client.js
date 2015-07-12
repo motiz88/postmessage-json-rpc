@@ -27,6 +27,11 @@ function isWindow(maybeWindow) {
     return maybeWindow && maybeWindow.window === maybeWindow;
 }
 
+/**
+ * A JSON-RPC 2.0 client that sends requests and notifications over `window.postMessage`.
+ * @constructor
+ */
+
 var PostMessageRpcClient = (function () {
     function PostMessageRpcClient(targetWindow) {
         var _this = this;
@@ -50,16 +55,28 @@ var PostMessageRpcClient = (function () {
 
     _createClass(PostMessageRpcClient, [{
         key: 'mount',
+
+        /** @function mount
+          * @memberof PostMessageRpcClient.prototype */
         value: function mount(window) {
             window.addEventListener('message', this.handleMessage);
         }
     }, {
         key: 'unmount',
+
+        /** @function unmount
+          * @memberof PostMessageRpcClient.prototype
+          */
         value: function unmount(window) {
             window.removeEventListener('message', this.handleMessage);
         }
     }, {
         key: '_dispatch',
+
+        /** @function _dispatch
+          * @memberof PostMessageRpcClient.prototype
+          * @access private
+          */
         value: function _dispatch(method, id) {
             for (var _len = arguments.length, params = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
                 params[_key - 2] = arguments[_key];
@@ -95,6 +112,10 @@ var PostMessageRpcClient = (function () {
         }
     }, {
         key: 'notify',
+
+        /** @function notify
+          * @memberof PostMessageRpcClient.prototype
+          */
         value: function notify(method) {
             for (var _len2 = arguments.length, params = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
                 params[_key2 - 1] = arguments[_key2];
@@ -104,6 +125,10 @@ var PostMessageRpcClient = (function () {
         }
     }, {
         key: 'request',
+
+        /** @function request
+          * @memberof PostMessageRpcClient.prototype
+          */
         value: function request(method) {
             for (var _len3 = arguments.length, params = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
                 params[_key3 - 1] = arguments[_key3];

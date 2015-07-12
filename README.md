@@ -2,7 +2,7 @@
 
 JSON-RPC over `window.postMessage`, with a Promise-based API.
 
-This package provides a server and client written in JavaScript that can communicate with each other across browser windows or `iframe`s.
+This package provides a server and client written in JavaScript that can communicate with each other across browser windows or `iframe`s using a subset of JSON-RPC 2.0.
 
 
 ## Code Example
@@ -53,6 +53,10 @@ I had a need to quickly "componentize" a legacy web app from an older project, s
 
 There were already some libraries that did something like this, but I really wanted a fully Promise-based async API on both the client and server side. So I coded one myself :smile:
 
+## Status/Caveats
+
+The JSON-RPC 2.0 implementation here is not complete, in that batch requests (at least) are not implemented, and there may be some other subtle discrepancies at the moment. Still, for what it does, the module is quite usable.
+
 ## Installation
 
 ```sh
@@ -63,7 +67,7 @@ Use Browserify / Webpack to include this module in your front-end code.
 
 ## API Reference
 
-(Watch this space for updates.)
+[Basic documentation is available on GitHub.](https://motiz88.github.io/postmessage-json-rpc/doc/)
 
 ## Tests
 

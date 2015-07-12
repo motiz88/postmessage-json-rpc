@@ -4,3 +4,5 @@ node_modules
 coverage
 sauce_connect.log
 npm-debug.log
+karma.saucelabs.ci.conf.js
+doc

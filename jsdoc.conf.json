@@ -1,0 +1,17 @@
+{
+    "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
+    "source": {
+    	"include": ["src"]
+    },
+    "opts": {
+    	"recurse": true,
+    	"encoding": "utf8",
+    	"readme": "README.md",
+        "private": false
+    },
+    "babel": {
+    	"filename": ".babelrc",
+        "blacklist": ["es6.classes"],
+        "plugins": ["class-properties-7to6", "jsdoc"]
+    }
+}

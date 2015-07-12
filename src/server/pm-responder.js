@@ -1,6 +1,8 @@
 import util from 'util';
 
-export default class PostMessageResponder {
+export default
+/** @ignore */
+class PostMessageResponder {
     constructor(router) {
         this.router = router;
     }
@@ -11,7 +13,9 @@ export default class PostMessageResponder {
             return;
 
         resultPromise
-            .then(result => ({result}),
+            .then(result => ({
+                    result
+                }),
                 error => ({
                     error: {
                         code: -32000,

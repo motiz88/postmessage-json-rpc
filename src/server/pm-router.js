@@ -1,4 +1,6 @@
-export default class PostMessageRouter {
+export default
+/** @ignore */
+class PostMessageRouter {
     constructor(handlers, defaultHandler) {
         this.handlers = handlers;
         if (!this.handlers || typeof this.handlers !== 'object')

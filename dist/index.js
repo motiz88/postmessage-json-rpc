@@ -1,3 +1,6 @@
+/**
+ * @module postmessage-json-rpc
+ */
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
