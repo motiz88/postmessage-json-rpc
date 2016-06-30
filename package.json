@@ -21,7 +21,7 @@
     "grunt-karma": "^0.11.2",
     "isparta-loader": "^0.2.0",
     "jsdoc": "git://github.com/jsdoc3/jsdoc",
-    "jsdoc-babel": "^0.1.0",
+    "jsdoc-babel": "^0.2.1",
     "karma": "^0.12.37",
     "karma-babel-preprocessor": "^5.2.1",
     "karma-beep-reporter": "^0.1.4",
